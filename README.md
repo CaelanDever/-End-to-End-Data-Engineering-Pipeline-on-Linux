@@ -54,6 +54,7 @@ Real-world connection: Often used in dashboards, monitoring tools, reporting job
 Learning moment: Practice HTTP GET, response codes, JSON parsing
 
 📌 Screenshot Placeholder: fetch_api_data.py in terminal fetching API data
+
 <img width="450" alt="pyapp" src="https://github.com/user-attachments/assets/5e6be800-7e1f-498f-9135-2093f1fa2155" />
 <img width="478" alt="rawd" src="https://github.com/user-attachments/assets/f0c79c6a-531b-46b6-b6ab-e2a6057537c5" />
 
@@ -84,6 +85,7 @@ Real-world connection: Data engineering teams spend 50–70% of time cleaning
 Learning moment: DataFrames, type handling, renaming columns
 
 📌 Screenshot Placeholder: Cleaned DataFrame in Pandas console
+
 <img width="478" alt="transform" src="https://github.com/user-attachments/assets/65a9660c-b2c4-4da0-a269-606d54e2d52f" />
 
 # transform_data.py
@@ -116,6 +118,7 @@ Real-world connection: Data lakes → structured DBs
 Learning moment: Schema creation, upserts, data typing
 
 📌 Screenshot Placeholder: psql CLI showing new table and rows
+
 <img width="470" alt="sqlsc" src="https://github.com/user-attachments/assets/a319676b-aadc-4818-acee-b14daf3b5bbd" />
 
 📅 Pre-Configuration Steps
@@ -149,6 +152,7 @@ Real-world connection: Data teams use DAGs for daily/hourly ingestion
 Learning moment: Dependencies, operators, scheduling, retry logic
 
 📌 Screenshot Placeholder: Airflow UI showing DAG runs
+
 <img width="397" alt="dag" src="https://github.com/user-attachments/assets/945a4e9a-504a-4d4b-a418-ecb6b2b34153" />
 <img width="461" alt="dagui" src="https://github.com/user-attachments/assets/ce06dbf1-323a-4ccc-8ec0-6ae1d1e80741" />
 <img width="653" alt="airf" src="https://github.com/user-attachments/assets/87210483-feb8-456c-a88b-80487dea52b7" />
