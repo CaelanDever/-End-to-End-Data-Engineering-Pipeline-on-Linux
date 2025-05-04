@@ -28,6 +28,7 @@ Deployment Platform: Linux server (bare metal or VM)
 
 📁 Project Structure
 -
+```
 .
 ├── dags/                      # Airflow DAGs
 │   └── data_pipeline.py
@@ -40,7 +41,7 @@ Deployment Platform: Linux server (bare metal or VM)
 ├── docker-compose.yml         # (Optional) for Airflow
 ├── README.md
 └── screenshots/               # 📌 Screenshot placeholders
-
+```
 # 🚀 Detailed Project Sections
 
 # 1. ✅ Fetching Raw Data from API
@@ -60,7 +61,7 @@ Learning moment: Practice HTTP GET, response codes, JSON parsing
 
 
 Troubleshooting Tip: Use response.status_code and .json() validation
-
+```
 # fetch_api_data.py
 import requests
 import json
@@ -73,6 +74,7 @@ if response.status_code == 200:
         json.dump(response.json(), f)
 else:
     print(f"Failed to fetch: {response.status_code}")
+```
 
 2. 🧹 Data Cleaning and Transformation
 
@@ -88,6 +90,7 @@ Learning moment: DataFrames, type handling, renaming columns
 
 <img width="478" alt="transform" src="https://github.com/user-attachments/assets/65a9660c-b2c4-4da0-a269-606d54e2d52f" />
 
+```
 # transform_data.py
 import pandas as pd
 import json
@@ -100,12 +103,16 @@ if isinstance(raw, list):
     df = pd.DataFrame(raw)
 else:
     raise TypeError("Expected list of records from API")
+```
 
 # Basic cleaning
+
+```
 df = df.dropna(subset=['title'])
 df.rename(columns={'userId': 'user_id', 'id': 'post_id'}, inplace=True)
 
 df.to_csv("cleaned_data.csv", index=False)
+```
 
 # 3. 🏗️ Load to PostgreSQL Database
 
@@ -125,12 +132,15 @@ Learning moment: Schema creation, upserts, data typing
 
 Before running this script, execute the following SQL commands inside the PostgreSQL shell:
 
+```
 CREATE USER pipeline_user WITH PASSWORD 'strongpass';
 CREATE DATABASE pipeline_db;
 GRANT ALL PRIVILEGES ON DATABASE pipeline_db TO pipeline_user;
+```
 
 📄 Updated Python Script
 
+```
 # load_to_postgres.py
 import pandas as pd
 from sqlalchemy import create_engine
@@ -140,6 +150,7 @@ engine = create_engine('postgresql://pipeline_user:strongpass@localhost:5432/pip
 
 df = pd.read_csv("cleaned_data.csv")
 df.to_sql('posts_data', engine, if_exists='replace', index=False)
+```
 
 # 4. ⚙️ Automate with Apache Airflow
 
@@ -157,6 +168,7 @@ Learning moment: Dependencies, operators, scheduling, retry logic
 <img width="461" alt="dagui" src="https://github.com/user-attachments/assets/ce06dbf1-323a-4ccc-8ec0-6ae1d1e80741" />
 <img width="653" alt="airf" src="https://github.com/user-attachments/assets/87210483-feb8-456c-a88b-80487dea52b7" />
 
+```
 # dags/data_pipeline.py
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -189,6 +201,7 @@ load = BashOperator(
 )
 
 fetch >> transform >> load
+```
 
 # 5. 🔍 Query the Database
 
@@ -204,7 +217,9 @@ Real-world connection: Ad hoc queries, dashboards, KPI tracking
 <img width="325" alt="querr" src="https://github.com/user-attachments/assets/a3db3de3-4e6d-460b-bf42-e2e72a9858c8" />
 
 -- Example Query
+```
 SELECT user_id, COUNT(*) AS post_count FROM posts_data GROUP BY user_id;
+```
 
 🧪 Challenges & Solutions
 -
